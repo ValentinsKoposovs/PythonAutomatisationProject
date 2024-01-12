@@ -1,10 +1,12 @@
 import requests
 import bs4
+from MakeExcel import *
 
+url = "https://warframe.fandom.com/wiki/Baza_Prime"
 # url = "https://warframe.fandom.com/wiki/Gotva_Prime"
 # url = "https://warframe.fandom.com/wiki/Paris_Prime"
 # url = "https://warframe.fandom.com/wiki/Catabolyst"
-url = "https://warframe.fandom.com/wiki/Amphis"
+# url = "https://warframe.fandom.com/wiki/Amphis"
 TheSite = requests.get(url)
 
 if(TheSite.status_code == 200):
@@ -12,12 +14,16 @@ if(TheSite.status_code == 200):
 
     Souped = RawSite.find_all('div', attrs = {'data-source' : "Slot"})
     Value = Souped[0].find_all(class_="pi-data-value pi-font")
-    CheckIfMelee = Value[0].string
+    WeaponSlot = Value[0].string
 
-    if(CheckIfMelee != "Melee"):
+    Souped = RawSite.find_all('div', attrs = {'data-source' : "Class"})
+    Value = Souped[0].find_all(class_="pi-data-value pi-font")
+    WeaponType = Value[0].string
 
-        Souped = RawSite.find_all(class_="pi-item pi-item-spacing pi-title pi-secondary-background")
-        WeaponName = Souped[0].string
+    Souped = RawSite.find_all(class_="pi-item pi-item-spacing pi-title pi-secondary-background")
+    WeaponName = Souped[0].string
+
+    if(WeaponSlot == "Primary" and (WeaponType == "Bow" or WeaponType == "Crossbow" or WeaponType == "Exalted Weapon" or WeaponType == "Launcher" or WeaponType == "Rifle" or WeaponType == "Sniper Rifle" or WeaponType == "Speargun" or WeaponName == "Shedu")):
         
         Souped = RawSite.find_all('div', attrs = {'data-source' : "Attack1CritChance"})
         Value = Souped[0].find_all(class_="pi-data-value pi-font")
@@ -53,7 +59,8 @@ if(TheSite.status_code == 200):
         Damage = MSandDMG[1][1:]
         Damage = float(Damage)
 
-
+        print("Weapon slot:", WeaponSlot)
+        print("Weapon Type:", WeaponType)
         print("Weapon name:", WeaponName)
         print("Damage:", Damage)
         print("Multishot:", Multishot)
@@ -61,8 +68,11 @@ if(TheSite.status_code == 200):
         print("Critical Chance:", CriticalChance)
         print("Critical Damage:", CriticalDamage)
         print("Status Chance:", StatusChance)
-
-    else:
+    elif(WeaponSlot == "Primary" and WeaponType == "Shotgun"):
+        pass
+    elif(WeaponSlot == "Secondary"):
+        pass
+    elif(WeaponSlot == "Melee"):
         Souped = RawSite.find_all(class_="pi-item pi-item-spacing pi-title pi-secondary-background")
         WeaponName = Souped[0].string
 
@@ -114,3 +124,10 @@ if(TheSite.status_code == 200):
         print("Critical Chance:", CriticalChance)
         print("Critical Damage:", CriticalDamage)
         print("Status Chance:", StatusChance)
+    else:
+        pass
+
+RifleMods0 = [1.55, 0.8, 0.55, 2, 1.2] #dmg,ms,fr,cc,cd
+ShotgunMods0 = [1.65, 1.1, 0.85, 2, 1.1] #dmg,ms,fr,cc,cd
+PistolMods0 = [2.2, 1.1, 0.6, 1.87, 1.1] #dmg,ms,ms/fr,cc,cd
+MeleeMods0 = [1.375, 3, 0.55, 2.75, 0.9] #dmg,range,atkspd,cc,cd
