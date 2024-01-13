@@ -21,8 +21,11 @@ Visbeidzot, pēc excel dokumenta izvedošanas, to var atvērt, "paspēlēties" a
 ## Izmantotās bibliotēkas
 
 requests - saites informācijas nolasīšanai
+
 bs4 - saites informācijas apstrādei
+
 os - faila esamības pārbaudei
+
 openpyxl - excel faila radīšanai un apstrādei
 
 
