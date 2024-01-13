@@ -72,7 +72,7 @@ if(TheSite.status_code == 200):
     if(WeaponSlot == "Primary" and (WeaponType == "Bow" or WeaponType == "Crossbow" or WeaponType == "Exalted Weapon" or WeaponType == "Launcher" or WeaponType == "Rifle" or WeaponType == "Sniper Rifle" or WeaponType == "Speargun" or WeaponName == "Shedu")):
         RifleExcel(InfoList)
 
-    elif(WeaponSlot == "Primary" and WeaponType == "Shotgun"):
+    elif(WeaponSlot == "Primary" and (WeaponType == "Shotgun" or WeaponName == "Bubonico")):
         ShotgunExcel(InfoList)
 
     elif(WeaponSlot == "Secondary"):
